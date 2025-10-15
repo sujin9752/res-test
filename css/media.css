@@ -144,9 +144,9 @@
     transform: rotate(-45deg);
     top: 50%;
   }
-  .mOpen{overflow: hidden;}   /* 추가 */
+  .mOpen{overflow: hidden;}   /* 추가 -> 메뉴가 나왔을때 아래의 컨텐츠 스크롤 막는 용도 */
   .mOpen:after{  /* 태블릿메뉴에서 왼쪽의 나머지 부분은 모달(검정)*/
-    position: absolute;
+    position: fixed;
     content: '';
     top: 0;
     left: 0;
@@ -154,6 +154,12 @@
     height: 100vh;
     background: rgba(0,0,0,0.7);
   }
+  /* 문제발생
+  .mOpen:after가 position:absolute라서 부모(mOpen)를 기준으로 깔림
+  메뉴 열린뒤 스크롤하면 부모의 렌더링 범위에서 벗어나거나 부모가 overflow / 높이 제한을 갖고 있으면 오버레이가 화면에서 사라진 듯 보일 수 있음  
+  (1) 모달용 비어있는 요소를 하나 만들어서 배치하는 방법
+  (2) 가상클래스로 사용한 경우는 position:fixed로 변경하는 방법
+  */
 
   .tit_wrap h2.tit{
     font-size: 4rem;
